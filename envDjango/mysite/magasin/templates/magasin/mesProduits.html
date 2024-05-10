@@ -1,0 +1,45 @@
+{% extends 'magasin/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de produits</title>
+    <style>
+        .product-image {
+            width: 200px; /* Définir la largeur souhaitée pour toutes les images */
+            height: auto; /* Garder le ratio d'aspect */
+        }
+    </style>
+</head>
+<body>  
+    <!-- body -->
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <!-- all products -->
+            <div id='products' class="col-lg-9 mx-auto">
+                {% block body %}
+                <div class="row mx-auto">
+                    {% for product in products %}
+                    <div id="{{ product.id }}" style="width: 400px; height: 300px;">
+                        {% if product.Img %}
+                            <img src="{{ product.Img.url }}" alt="Card image cap" class="product-image" width="300px" height="200px">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                        <div>
+                            <p>{{ product.libelle }}</p>
+                            <p><b>{{ product.description }}</b></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

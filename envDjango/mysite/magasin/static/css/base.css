@@ -1,0 +1,11 @@
+#conteneur
+{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+html {
+    text-size-adjust: 100%;
+}
+
+

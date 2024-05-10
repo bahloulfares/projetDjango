@@ -1,0 +1,53 @@
+{% extends 'magasin/base.html' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des fournisseurs</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* You can add custom styles here */
+    </style>
+</head>
+<body>
+    
+    {% block body %}
+    <div class="container">
+       <center> <h1>Ajouter un fournisseur</h1></center>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.nom.label_tag }}
+                {{ form.nom }}
+            </div>
+            <div class="form-group">
+                {{ form.adresse.label_tag }}
+                {{ form.adresse }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                {{ form.telephone.label_tag }}
+                {{ form.telephone }}
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter le fournisseur</button>
+        </form>
+
+        <h2>Liste des fournisseurs</h2>
+        <ul class="list-group">
+            {% for fournisseur in list %}
+                <li class="list-group-item">{{ fournisseur.nom }} - {{ fournisseur.adresse }} - {{ fournisseur.email }} - {{ fournisseur.telephone }}</li>
+            {% empty %}
+                <li class="list-group-item">Aucun fournisseur disponible</li>
+            {% endfor %}
+        </ul>
+    </div>
+ {% endblock %}
+    <!-- Bootstrap JS scripts -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

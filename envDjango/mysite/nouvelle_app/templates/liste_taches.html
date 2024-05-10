@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestionnaire de Tâches</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container mt-5">
+        <center><h1>Liste des Tâches</h1></center>
+        <ul class="list-group">
+            {% for tache in taches %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ tache.titre }}</strong>
+                    {% if not tache.termine %}
+                    <span class="badge badge-warning ml-2">En cours</span>
+                    {% else %}
+                    <span class="badge badge-success ml-2">Terminé</span>
+                    {% endif %}
+                    <p>{{ tache.description }}</p>
+                    <p>Date de création : {{ tache.date_creation }}</p>
+                </div>
+                <div>
+                    {% if not tache.termine %}
+                    <form method="post" action="{% url 'marquer_termine' tache.id %}" class="mr-2">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-primary">Marquer comme terminé</button>
+                    </form>
+                    {% endif %}
+                    <form method="post" action="{% url 'supprimer_tache' tache.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'ajouter_tache' %}" class="btn btn-primary mt-3">Ajouter une tâche</a>
+    </div>
+</body>
+</html>
